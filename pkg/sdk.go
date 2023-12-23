@@ -3,7 +3,7 @@ package pkg
 import (
 	"errors"
 
-	pb "github.com/ssummers02/invest-api-go-sdk/pkg/investapi"
+	pb "github.com/avatar29A/invest-api-go-sdk/pkg/investapi"
 )
 
 // ServicePool is a ready-to-use scope for all available non-stream services.

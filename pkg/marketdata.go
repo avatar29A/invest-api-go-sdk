@@ -1,7 +1,7 @@
 package pkg
 
 import (
-	pb "github.com/ssummers02/invest-api-go-sdk/pkg/investapi"
+	pb "github.com/avatar29A/invest-api-go-sdk/pkg/investapi"
 
 	"github.com/golang/protobuf/ptypes/timestamp"
 	"google.golang.org/grpc"
