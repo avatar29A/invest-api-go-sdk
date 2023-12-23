@@ -5,8 +5,8 @@ import (
 	"log"
 	"time"
 
-	"github.com/ssummers02/invest-api-go-sdk/pkg"
-	pb "github.com/ssummers02/invest-api-go-sdk/pkg/investapi"
+	"github.com/avatar29A/invest-api-go-sdk/pkg"
+	pb "github.com/avatar29A/invest-api-go-sdk/pkg/investapi"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
