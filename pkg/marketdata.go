@@ -18,6 +18,8 @@ type MarketDataInterface interface {
 	GetTradingStatus(figi string) (*pb.GetTradingStatusResponse, error)
 	// GetLastTrades The method of requesting the latest depersonalized transactions on the instrument.
 	GetLastTrades(figi string, from, to *timestamp.Timestamp) ([]*pb.Trade, error)
+	// GetClosePrices returns of requesting the latest closing prices
+	GetClosePrices(figi []string) ([]*pb.InstrumentClosePriceResponse, error)
 }
 
 type MarketDataService struct {
@@ -63,6 +65,27 @@ func (ms *MarketDataService) GetLastPrices(figi []string) ([]*pb.LastPrice, erro
 	}
 
 	return res.LastPrices, nil
+}
+
+func (ms *MarketDataService) GetClosePrices(figi []string) ([]*pb.InstrumentClosePriceResponse, error) {
+	ctx, cancel := CreateRequestContext(ms.config)
+	defer cancel()
+
+	instruments := make([]*pb.InstrumentClosePriceRequest, 0, len(figi))
+	for _, id := range figi {
+		instruments = append(instruments, &pb.InstrumentClosePriceRequest{
+			InstrumentId: id,
+		})
+	}
+
+	res, err := ms.client.GetClosePrices(ctx, &pb.GetClosePricesRequest{
+		Instruments: instruments,
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	return res.ClosePrices, nil
 }
 
 func (ms *MarketDataService) GetOrderBook(figi string, depth int) (*pb.GetOrderBookResponse, error) {
